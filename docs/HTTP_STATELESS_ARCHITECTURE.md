@@ -5,7 +5,7 @@
 For each `POST /mcp` request:
 
 1. create fresh `McpServer`
-2. create fresh `NodeStreamableHTTPServerTransport`
+2. create fresh `NodeStreamableHTTPServerTransport` with `sessionIdGenerator: undefined`
 3. connect server to transport
 4. handle request
 5. close transport and server

@@ -47,7 +47,9 @@ app.post('/mcp', async (req: Request, res: Response) => {
   const requestId = randomUUID();
   const server = createStatelessLearningServer();
 
-  const transport = new NodeStreamableHTTPServerTransport();
+  const transport = new NodeStreamableHTTPServerTransport({
+    sessionIdGenerator: undefined,
+  });
 
   let closed = false;
   const closeAll = async (): Promise<void> => {
