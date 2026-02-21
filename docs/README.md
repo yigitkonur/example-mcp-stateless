@@ -1,45 +1,17 @@
-# Documentation Hub
+# documentation
 
-This folder contains the learning and operational docs for this MCP boilerplate.
+guides for the example-mcp-stateless boilerplate, covering setup through validation.
 
-- Repository overview and quick start: `../README.md`
-- Release history: `../CHANGELOG.md`
+## reading order
 
-## Recommended Reading Order
+1. [01-getting-started.md](01-getting-started.md) -- install, run, and verify the server
+2. [02-architecture.md](02-architecture.md) -- module layout, stateless lifecycle, endpoint contract
+3. [03-scaffold-cli.md](03-scaffold-cli.md) -- CLI reference for `init` and `generate` commands
+4. [04-sdk-v2-notes.md](04-sdk-v2-notes.md) -- v2 packages, vendoring strategy, v1 migration
+5. [05-validation.md](05-validation.md) -- CI pipeline, smoke test, mcp-cli checks
 
-1. `../README.md`  
-   Use this for setup, first run, and local verification commands.
-2. `V2_SDK_OVERVIEW.md`  
-   Understand what changed in SDK v2 and which v2 patterns this project enforces.
-3. `HTTP_STATELESS_ARCHITECTURE.md`  
-   Learn the request lifecycle, stateless guarantees, and trade-offs.
-4. `CLI_SCAFFOLDER.md`  
-   Generate starter projects and primitive stubs with the built-in CLI.
+## audience guide
 
-## Document Index
-
-### `V2_SDK_OVERVIEW.md`
-
-- v2 package model and API shifts used in this repo
-- v1 concepts intentionally removed
-- practical migration and implementation notes
-
-### `HTTP_STATELESS_ARCHITECTURE.md`
-
-- per-request server/transport lifecycle
-- endpoint behavior and cleanup model
-- stateless trade-offs and mitigation guidance
-
-### `CLI_SCAFFOLDER.md`
-
-- CLI command reference (`init`, `generate`)
-- generated project layout
-- validation and troubleshooting workflow
-
-## Scope of This Documentation
-
-- MCP TypeScript SDK v2-oriented implementation
-- HTTP stateless transport only
-- starter CLI and generated project workflow
-
-Stateful/SSE/server-side OAuth flows are intentionally out of scope in this repository.
+- **new users**: start with 01, then 03
+- **evaluating stateless pattern**: read 02
+- **maintainers**: 02 + 05

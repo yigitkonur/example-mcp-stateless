@@ -1,40 +1,48 @@
 # CLAUDE.md
 
-## Project Overview
+## project
 
-This repository is a learning-oriented **MCP HTTP stateless** boilerplate using **TypeScript SDK v2 pre-release APIs**.
+learning-first MCP HTTP stateless boilerplate using TypeScript SDK v2 pre-release APIs, with a scaffold CLI for generating new projects and primitive stubs.
 
-It contains:
+## what's inside
 
-- A runnable reference server (`src/server.ts`, `src/mcpServer.ts`)
-- A starter/generator CLI (`src/cli.ts`)
-- Learning material (`docs/`)
+- `src/server.ts` -- Express app, CORS, rate limiting, HTTP route handlers, per-request transport lifecycle
+- `src/mcpServer.ts` -- MCP server factory with `calculate`, `describe_stateless_limits` tools, `boilerplate://limitations` and `boilerplate://topic/{topic}` resources, `design-next-tool` prompt
+- `src/types.ts` -- Zod v4 schemas (`calculateInputSchema`, `calculateOutputSchema`, `topicSchema`, `planningPromptArgsSchema`), `AppConfig` type, `readAppConfig()` env parser
+- `src/cli.ts` -- scaffold CLI with `init` (project bootstrap) and `generate` (tool/resource/prompt stubs) commands
+- `scripts/smoke-http.mjs` -- end-to-end HTTP smoke test
+- `scripts/refresh-sdk-v2.sh` -- repacks vendored SDK tarballs from a local SDK checkout
+- `vendor/mcp-sdk-v2/` -- pinned SDK v2 pre-release tarballs
 
-## Core Technical Rules
+## transport
 
-- Transport: `NodeStreamableHTTPServerTransport`
-- Mode: stateless only (`sessionIdGenerator: undefined`)
-- Registration APIs: `registerTool`, `registerResource`, `registerPrompt`
-- Schemas: Zod v4 (`z.object(...)`), no raw shape shortcuts
-- Error model: `ProtocolError` / `ProtocolErrorCode`
+stateless mode. `NodeStreamableHTTPServerTransport({ sessionIdGenerator: undefined })`. fresh `McpServer` + transport instance per `POST /mcp` request. no sessions, no state, no coordination.
 
-## Dependency Model
+## sdk rules
 
-SDK v2 packages are pinned as local tarballs in `vendor/mcp-sdk-v2`.
-Do not replace them with `@modelcontextprotocol/sdk` v1.
+- use `@modelcontextprotocol/server`, `@modelcontextprotocol/node`, `@modelcontextprotocol/express` -- never `@modelcontextprotocol/sdk`
+- use `registerTool`, `registerResource`, `registerPrompt` -- never `.tool()`, `.resource()`, `.prompt()` shorthand
+- use `ProtocolError` / `ProtocolErrorCode` -- never `McpError` / `ErrorCode`
+- use `z.object(...)` from `zod/v4` for all schemas -- no raw shape objects
+- `exactOptionalPropertyTypes` is disabled due to SDK v2 alpha typing friction
 
-Refresh command:
-
-```bash
-npm run refresh:sdk-v2 -- ../typescript-sdk
-```
-
-## Validation Commands
+## commands
 
 ```bash
-npm run build
-npm run check
-npm run smoke
+npm run dev              # run with tsx (no build needed)
+npm run build            # clean + compile TypeScript
+npm start                # run compiled server
+npm run check            # typecheck + lint + format check
+npm run smoke            # end-to-end HTTP smoke test
+npm run ci               # build + check + smoke (full pipeline)
+npm run cli -- init <name> [--install] [--force]   # scaffold new project
+npm run create -- generate <tool|resource|prompt> <name> [--force]  # generate stub
+npm run refresh:sdk-v2 -- /path/to/typescript-sdk  # refresh vendored tarballs
 ```
 
-`npm run smoke` is required for end-to-end MCP verification.
+## endpoints
+
+- `POST /mcp` -- MCP JSON-RPC handler (port 1071)
+- `GET /mcp` -- 405
+- `DELETE /mcp` -- 405
+- `GET /health` -- liveness check
