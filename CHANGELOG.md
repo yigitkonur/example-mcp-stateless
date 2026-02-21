@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-02-21 - Rename: example-mcp-server-http-stateless -> example-mcp-stateless
+
+### Refactor
+
+- Renamed repository and all internal identifiers from `example-mcp-server-http-stateless` / `mcp-http-stateless-v2-boilerplate` to `example-mcp-stateless`.
+- Updated `package.json` `name` field.
+- Updated `package-lock.json` `name` fields.
+- Updated MCP server `name` identifier in `src/mcpServer.ts`.
+
 ## 2026-02-21 - Documentation IA and quality reorganization
 
 ### Documentation improvements

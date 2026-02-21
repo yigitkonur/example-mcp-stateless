@@ -1,5 +1,5 @@
 {
-  "name": "mcp-http-stateless-v2-boilerplate",
+  "name": "example-mcp-stateless",
   "version": "2.0.0-alpha.0",
   "description": "Learning-first MCP HTTP stateless boilerplate and starter CLI built on MCP TypeScript SDK v2 pre-release.",
   "type": "module",

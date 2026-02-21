@@ -52,7 +52,7 @@ function calculate(a: number, b: number, op: 'add' | 'subtract' | 'multiply' | '
 export function createStatelessLearningServer(): McpServer {
   const server = new McpServer(
     {
-      name: 'mcp-http-stateless-v2-boilerplate',
+      name: 'example-mcp-stateless',
       version: '2.0.0-alpha.0',
     },
     {
