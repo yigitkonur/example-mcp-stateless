@@ -14,3 +14,4 @@ jobs:
       - run: npm run lint:ci
       - run: npm run format:check
       - run: npm run build
+      - run: npm run smoke

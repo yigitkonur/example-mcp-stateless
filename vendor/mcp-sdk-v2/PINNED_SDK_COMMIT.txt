@@ -1,0 +1,4 @@
+modelcontextprotocol/typescript-sdk main
+commit: c4ee360aac7afd2964785abac379a290d0c9847a
+packed-on: 2026-02-20
+notes: pre-release v2 tarballs generated locally with pnpm pack
