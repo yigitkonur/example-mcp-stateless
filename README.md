@@ -32,8 +32,8 @@ Because v2 package publication/distribution is still evolving, this boilerplate 
 ## Quick start
 
 ```bash
-git clone https://github.com/yigitkonur/example-mcp-server-http-stateless.git
-cd example-mcp-server-http-stateless
+git clone https://github.com/yigitkonur/example-mcp-stateless.git
+cd example-mcp-stateless
 npm install
 npm run dev
 ```
